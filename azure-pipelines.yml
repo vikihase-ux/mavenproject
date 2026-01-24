@@ -82,5 +82,5 @@ stages:
       inputs:
         azureSubscription: 'azure-devops-dev'
         appType: 'webApp'
-        appName: 'maven-webapp'
+        appName: '$(azureAppNmae)'   #you need to update app name as per your project
         package: '$(System.ArtifactsDirectory)/drop/webapp.war'
