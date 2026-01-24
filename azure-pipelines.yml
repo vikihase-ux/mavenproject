@@ -83,7 +83,8 @@ stages:
     - task: AzureWebApp@1
       displayName: 'Deploy to Dev Azure Web App'
       inputs:
-        azureSubscription: '$(azureSubscription)'
-        appType: 'webApp'
-        appName: '$(azureAppNmae)'   #you need to update app name as per your project
+        azureSubscription: 'azure-devops-dev'
+        appType: 'webAppLinux'
+        appName: 'newappmaven'
         package: '$(System.ArtifactsDirectory)/drop/webapp.war'
+        runtimeStack: 'JAVA|11-java11'
