@@ -1,5 +1,5 @@
 trigger:
-- main   # runs when code is pushed to main branch
+- master   # runs when code is pushed to main branch
 
 pool:
   name: 'agnet0526'
