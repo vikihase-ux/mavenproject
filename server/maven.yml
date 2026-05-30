@@ -1,0 +1,9 @@
+trigger:
+- main   # runs when code is pushed to main branch
+
+pool:
+  name: 'agnet0526'
+
+steps:
+- script: maven validate
+  displayName: 'Maven Validate'
