@@ -1,9 +1,32 @@
 trigger:
-- master   # runs when code is pushed to main branch
+- main       #LIST       # Runs when changes are pushed to the 'main' branch
+- master
+- devops
 
 pool:
- vmImage: 'ubuntu-latest'
- 
+  vmImage: 'ubuntu-latest'  # Use Microsoft-hosted Ubuntu agent
+
 steps:
-  - script: mvn compile
-    displayName: 'Maven Compile'
+
+
+- script: mvn test
+  displayName: 'Test Maven Project'
+
+- script: mvn package
+  displayName: 'Package Maven Project'
+  env:
+    MAVEN_OPTS: -DskipTests-true
+
+- task: CopyFiles@2
+  inputs:
+    #SourceFolder: '/home/vsts/work/1/s/webapp/target'  # Adjust the path to your build output
+    Contents: '**/*.war'  # Adjust the pattern to match your build artifacts
+    TargetFolder: '/home/vsts/agent/'
+    #'$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '/home/vsts/agent/'
+    #'$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
